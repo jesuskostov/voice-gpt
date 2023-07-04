@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Speech Recognition</title>
     <!-- mob -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,12 +45,11 @@
             var last = event.results.length - 1;
             var text = event.results[last][0].transcript;
             console.log(text)
-            console.log(123)
         
-            // if (text.toLowerCase().includes('елиза')) {
-              let msg = text.toLowerCase().replace('елиза', '')
-               document.querySelector('#chat-area').textContent += msg + '\n';
-            // }
+            if (text.toLowerCase().includes('елиза')) {
+                let msg = text.toLowerCase().replace('елиза', '');
+                document.querySelector('#chat-area').textContent += msg + '\n';
+            }
         };
         
         recognition.onerror = function (event) {
@@ -58,8 +57,6 @@
         };
         
         recognition.start();
-
-
     </script>
 </body>
 
