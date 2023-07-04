@@ -45,11 +45,12 @@
             var last = event.results.length - 1;
             var text = event.results[last][0].transcript;
             console.log(text)
+            console.log(123)
         
-            if (text.toLowerCase().includes('елиза')) {
+            // if (text.toLowerCase().includes('елиза')) {
               let msg = text.toLowerCase().replace('елиза', '')
                document.querySelector('#chat-area').textContent += msg + '\n';
-            }
+            // }
         };
         
         recognition.onerror = function (event) {
