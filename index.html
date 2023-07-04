@@ -17,44 +17,47 @@
         <div id="chat-area" class="p-4 h-64 overflow-y-auto">
             <!-- Chat messages will be appended here -->
         </div>
-        <button id="voice-button"
-            class="px-10 font-semibold mx-auto h-14 rounded-full bg-white flex justify-center items-center text-black active:opacity-50 select-none">Задръж
-            и попитай</button>
-
     </div>
 
     <script>
         var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var recognition = new SpeechRecognition();
-
+        
         recognition.lang = 'bg-BG'; // Bulgarian language
         recognition.interimResults = false;
-
-        var button = document.querySelector('#voice-button');
-
-        ['mousedown', 'touchstart'].forEach(function (evt) {
-            button.addEventListener(evt, function () {
-                recognition.start();
-            });
-        });
-
-        ['mouseup', 'touchend'].forEach(function (evt) {
-            button.addEventListener(evt, function () {
-                recognition.stop();
-            });
-        });
-
-        recognition.addEventListener('result', function (event) {
+        recognition.continuous = true; // Enable continuous speech recognition
+        
+        var isListening = false; // Flag to track the listening state
+        
+        recognition.onstart = function () {
+            console.log('Recognition started');
+            isListening = true;
+        };
+        
+        recognition.onend = function () {
+            console.log('Recognition ended');
+            if (isListening) {
+                recognition.start(); // Restart recognition if previously in listening state
+            }
+        };
+        
+        recognition.onresult = function (event) {
             var last = event.results.length - 1;
             var text = event.results[last][0].transcript;
-            console.log(text);
-
-            document.querySelector('#chat-area').textContent += 'User: ' + text + '\n';
-        });
-
-        recognition.addEventListener('error', function (event) {
+            console.log(text)
+        
+            if (text.toLowerCase().includes('елиза')) {
+              let msg = text.toLowerCase().replace('елиза', '')
+               document.querySelector('#chat-area').textContent += msg + '\n';
+            }
+        };
+        
+        recognition.onerror = function (event) {
             console.log('Error occurred in recognition: ' + event.error);
-        });
+        };
+        
+        recognition.start();
+
 
     </script>
 </body>
