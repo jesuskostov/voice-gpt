@@ -46,7 +46,7 @@
 
         recognition.lang = 'bg-BG'; // Bulgarian language
         recognition.interimResults = false;
-        recognition.continuous = true; // Enable continuous speech recognition
+        recognition.continuous = false; // Disable continuous speech recognition initially
 
         var isListening = false; // Flag to track the listening state
 
@@ -73,13 +73,21 @@
                 let msg = text.toLowerCase().replace('елиза', '');
                 document.querySelector('#chat-area').textContent += msg + '\n';
             }
+            
+            // Stop recognition after processing a result
+            recognition.stop();
         };
 
         recognition.onerror = function (event) {
             console.log('Error occurred in recognition: ' + event.error);
         };
 
-        recognition.start();
+        // Start recognition when user clicks anywhere on the document
+        document.addEventListener('click', function() {
+            if (!isListening) {
+                recognition.start();
+            }
+        });
     </script>
 </body>
 
