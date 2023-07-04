@@ -56,7 +56,7 @@
         recognition.onstart = function () {
             console.log('Recognition started');
             isListening = true;
-            document.getElementById('pulse-element').classList.add('pulse-element');
+            
         };
 
         recognition.onend = function () {
@@ -73,6 +73,7 @@
             console.log(text)
 
             if (text.toLowerCase().includes('елиза')) {
+                document.getElementById('pulse-element').classList.add('pulse-element');
                 let msg = text.toLowerCase().replace('елиза', '');
                 document.querySelector('#chat-area').textContent += msg + '\n';
             }
