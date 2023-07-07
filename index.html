@@ -21,22 +21,8 @@
             }
         }
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(0) scale(1);
-            }
-
-            to {
-                transform: translateY(-100px) scale(0.8);
-            }
-        }
-
         .fade-in {
-            animation: fadeIn 2s forwards;
-        }
-
-        .slide-up {
-            animation: slideUp 2s forwards;
+            animation: fadeIn 2s;
         }
 
         .placeholder {
@@ -49,6 +35,7 @@
 
     <div id="chat-area"
         style="background-color: black; color:white;display: flex; height: 100vh; align-items: center; justify-content: center; font-size: 32px;">
+
     </div>
 
     <script>
@@ -77,7 +64,7 @@
 
             if (text.toLowerCase().includes('елиза')) {
                 let msg = text.toLowerCase().replace('елиза', '');
-                addAnimatedText(msg, true);
+                addAnimatedText(msg);
             }
         };
 
@@ -87,7 +74,7 @@
 
         recognition.start();
 
-        function addAnimatedText(text, isQuestion = false) {
+        function addAnimatedText(text) {
             let chatArea = document.querySelector('#chat-area');
             chatArea.innerHTML = ''; // clear previous text
             let words = text.split(' ');
@@ -106,10 +93,6 @@
                     node.classList.add('fade-in');
                 }, 250 * index);
             });
-
-            if (isQuestion) {
-                document.querySelector('#chat-area').classList.add('slide-up');
-            }
         }
         addAnimatedText('Аз съм Елиза и съм тук за да ти помогна');
 
