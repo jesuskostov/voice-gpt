@@ -92,7 +92,8 @@
 
             if (text.toLowerCase().includes('елиза')) {
                 let msg = text.toLowerCase().replace('елиза', '');
-                document.querySelector('#chat-area').textContent += msg + '\n';
+                document.querySelector('#chat-area').textContent = '';
+                document.querySelector('#chat-area').textContent = msg;
             }
         };
 
